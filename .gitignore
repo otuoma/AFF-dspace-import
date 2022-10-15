@@ -1,0 +1,4 @@
+venv
+aff_archive/*
+.idea
+__pyche__/
