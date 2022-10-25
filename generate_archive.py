@@ -7,9 +7,9 @@ import utilities
 
 utils = utilities.Utils()
 
-def read_csv():
+def generate_archive():
 
-    df = pandas.read_csv('publications_export.csv', parse_dates=['post_date'])
+    df = pandas.read_excel('publications_export.xlsx', parse_dates=['post_date'])
     counter = 1
     for index, row in df.iterrows():
 
@@ -21,17 +21,21 @@ def read_csv():
         metadata = utils.create_xml_file(metadata=row)
 
         # bitstreams
-        if "english_upload" in row.keys():
+
+        if not str(row['english_upload']).lower() == "nan":
             english_bitstream = utils.download_bitstream(item_id, row['english_upload'], "english_")
 
             with open(f"{item_dir}/contents", "+a") as f:
                 if english_bitstream:
+                    print(f" - saving english bitstream")
                     f.write(f"english_{item_id}.pdf")
 
-        if "french_upload" in row.keys():
+        if not str(row['french_upload']).lower() == "nan":
+
             french_bitstream = utils.download_bitstream(row['id'], row['french_upload'], "french_")
             with open(f"{item_dir}/contents", "+a") as f:
                 if french_bitstream:
+                    print(f" - saving french bitstream")
                     f.write(f"\nfrench_{item_id}.pdf")
 
         # # collections
@@ -47,4 +51,5 @@ def read_csv():
 
         time.sleep(2)
 
-read_csv()
+
+generate_archive()

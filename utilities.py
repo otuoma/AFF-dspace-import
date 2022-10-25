@@ -13,13 +13,13 @@ class Utils:
 
         # title
         title_el = et.Element("dcvalue")
-        title_el.text = metadata['Title']
+        title_el.text = str(metadata['Title'])
         title_el.set("element", "title")
         root.append(title_el)
 
         # contributor
         contributor_el = et.Element("dcvalue")
-        contributor_el.text = metadata['author']
+        contributor_el.text = str(metadata['author'])
         contributor_el.set("element", "contributor")
         contributor_el.set("qualifier", "author")
         root.append(contributor_el)
@@ -33,7 +33,7 @@ class Utils:
 
         # abstract
         abstract_el = et.Element("dcvalue")
-        abstract_el.text = metadata['Abstract']
+        abstract_el.text = str(metadata['Abstract'])
         abstract_el.set("element", "description")
         abstract_el.set("qualifier", "abstract")
         root.append(abstract_el)
@@ -47,7 +47,7 @@ class Utils:
 
         # type
         type_el = et.Element("dcvalue")
-        type_el.text = metadata["Publication_Type"]
+        type_el.text = str(metadata["Publication_Type"])
         type_el.set("element", "type")
         type_el.set("qualifier", "none")
         root.append(type_el)
@@ -57,7 +57,9 @@ class Utils:
             try:
                 tree.write(f, encoding="utf-8", xml_declaration=True, default_namespace=None)
             except Exception as e:
+                print("====================================================")
                 print(f" - Failed saving metadata file for {metadata['id']}, Error => {e}")
+                print("====================================================")
 
     def download_bitstream(self, item_id: int, download_url: str, language_prefix: str) -> bool:
 
@@ -95,16 +97,16 @@ class Utils:
     def get_collection_id(self, publication_type: str) -> int:
 
         collections = {
-            "Book": 6,
-            "Compendium": 8,
-            "Factsheet": 14,
-            "Journal Article": 10,
-            "Newsletter": 24,
-            "Policy Brief": 12,
-            "Proceedings": 23,
-            "Report": 16,
-            "Training Module": 20,
-            "Working Paper": 18
+            "Book": 226,
+            "Compendium": 227,
+            "Factsheet": 228,
+            "Journal Article": 229,
+            "Newsletter": 230,
+            "Policy Brief": 231,
+            "Proceedings": 232,
+            "Report": 233,
+            "Training Module": 234,
+            "Working Paper": 235
         }
         if publication_type in collections:
             return collections.get(publication_type)
