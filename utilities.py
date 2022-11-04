@@ -28,7 +28,7 @@ class Utils:
         date_avail_el = et.Element("dcvalue")
         date_avail_el.text = str(metadata['post_date'])
         date_avail_el.set("element", "date")
-        date_avail_el.set("qualifier", "available")
+        date_avail_el.set("qualifier", "issued")
         root.append(date_avail_el)
 
         # abstract

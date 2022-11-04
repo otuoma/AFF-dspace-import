@@ -15,6 +15,7 @@ def generate_archive():
 
         print(f"Processing {counter} - id {row['id']}")
 
+
         item_id = row['id']
 
         item_dir = utils.create_item_dir(item_id=item_id)

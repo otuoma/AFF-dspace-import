@@ -1,4 +1,5 @@
 venv
 aff_archive/*
 .idea
-__pyche__/
+__pycache__/*
+.gitignore
